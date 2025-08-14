@@ -6,7 +6,7 @@ export const IMG_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_l
 
 export const API_URL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.5743545&lng=88.3628734&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
-export const PAGE_URL = "https://www.swiggy.com/collections/80448?collectio…48&tags=layout_BAU_Contextual%2Ckachori&type=rcv2"
+export const PAGE_URL = "https://www.swiggy.com/collections/80448?collectio…48&tags=layout_BAU_Contextual%2Ckachori&type=rcv2";
 
 export const NAV_ITEMS = [
   {
