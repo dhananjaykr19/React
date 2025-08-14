@@ -13,12 +13,19 @@ const RestaurantMenu = () => {
         return <Shimmer />;
         
     const restaurantInfo = resInfo?.cards[2]?.card?.card?.info;
-    const rawItemCards = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards;
+    const rawItemCards = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+    
+    const categories = rawItemCards?.filter(
+        (c) => c?.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
+    console.log(categories);
+
+    
     return (
         <div className="mx-auto text-center mt-10">
             <ItemDescription resData={restaurantInfo}/>
-            <RestaurantCateogry resData={rawItemCards}/>
+            <RestaurantCateogry resData={categories}/>
         </div>
     );
 };
