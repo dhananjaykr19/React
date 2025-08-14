@@ -1,20 +1,9 @@
 import React from 'react'
-import { Link, useParams } from 'react-router-dom'
-import useRestaurantMenu from '../Hooks/useRestaurantMenu';
-import Shimmer from './shimmar';
+import { Link } from 'react-router-dom'
 
-const ItemDescription = () => {
+const ItemDescription = ({resData}) => {
 
-    const {resId } = useParams();
-    const resInfo = useRestaurantMenu(resId);
-
-    if (!resInfo) 
-        return <Shimmer />;
-
-    console.log(resInfo);
-    const restaurantInfo = resInfo?.cards[2]?.card?.card?.info;
-
-    const { name, avgRating, costForTwoMessage, locality, sla, totalRatingsString } = restaurantInfo;
+    const { name, avgRating, costForTwoMessage, locality, sla, totalRatingsString } = resData;
     return (
         <div className='mb-4'>
             <h1 className='text-3xl font-bold text-gray-800 mb-3'>{name}</h1>
