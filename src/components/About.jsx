@@ -2,11 +2,12 @@ import React from 'react'
 import User from './User';
 import UserClass from './UserClass';
 import { Component } from 'react';
+import UserContext from "../context/UserContext.js"
 
 class About extends Component{
     constructor(props){
         super(props);
-        console.log("Parent Constructor called");
+        // console.log("Parent Constructor called");
     }
 
     componentDidMount(){
@@ -19,6 +20,14 @@ class About extends Component{
         return (
             <div>
                 <h1>About</h1>
+                <div>
+                    LoggedIn User
+                    <UserContext.Consumer>
+                        {({loggedUser}) => (
+                            <h1 className='text-xl font-bold'>{loggedUser}</h1>
+                        )}
+                    </UserContext.Consumer>
+                </div>
                 <h2 className=''>Hii</h2>
                 <User  name={"Dhananjay function()"}/> 
                 {/* <UserClass name={"Dhananjay class()"}/> */}
