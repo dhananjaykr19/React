@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IMG_URL } from '../utils/constants';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../utils/cartSlice';
 
 const ItemList = ({ items }) => {
+
+    // const [itemCount, setItemCount] = useState(0);
+
+    const dispatch = useDispatch();
+
+    const handleAddItem = (item) => {
+        // Dispatch an action
+        dispatch(addItem(item));
+        // TODO: 
+        // const itemId = item?.card?.info?.id;
+        // setItemCount((prev) => ({
+        //     ...prev,
+        //     [itemId]: (prev[itemId] || 0) + 1,
+        // }));
+    }
+
     return (
         <div className="divide-y divide-gray-200">
             {items.map((item) => {
@@ -37,8 +55,11 @@ const ItemList = ({ items }) => {
                             )}
                             <button
                                 className="absolute bottom-1 bg-white border border-gray-300 rounded-lg px-3 py-1 text-green-600 font-semibold shadow-sm hover:bg-green-50 transition-colors"
+                                // value={itemCount}
+                                // onChange={(e) => setItemCount(e.target.value)}
+                                onClick={() => handleAddItem(item)} // dispatch action
                             >
-                                Add +
+                                Add + {/* Add {itemCount} */}
                             </button>
                         </div>
                     </div>
