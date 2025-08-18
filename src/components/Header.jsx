@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { LOGO_URL, NAV_ITEMS } from '../utils/constants';
 import { Link, NavLink } from 'react-router-dom';
 import useShowStatus from '../Hooks/useShowStatus';
+import UserContext from '../context/UserContext';
+import { useSelector } from 'react-redux';
+import { ShoppingCart } from 'lucide-react';
 const Header = () => {
 
     const [btnName, setBtnName] = useState("Login");
@@ -10,10 +13,18 @@ const Header = () => {
     // if dependency array is empty = [] => useEffect is called on initial render (just once)
     // if dependency array is [btnName] => called everytime btnName is updated
     useEffect(() => {
-        console.log("useEffect called");
+        // console.log("useEffect called");
     }, [btnName]);
 
     const onlineStatus = useShowStatus();
+
+    const { loggedUser } = useContext(UserContext);
+    // console.log(loggedUser);
+
+    // Subscribing to the store using a selector 
+    const cartItems = useSelector((store) => store.cart.items);
+    // console.log(cartItems);
+    
 
     return (
         <header className='bg-white shadow-lg sticky top-0 z-50'>
@@ -53,13 +64,25 @@ const Header = () => {
                                 );
                             })
                         }
-                        <span className="text-lg">🛒 Cart</span>
+                        <NavLink
+                            to="/cart"
+                            className="relative flex items-center gap-2 text-gray-700 hover:text-green-600 transition-colors"
+                        >
+                            <ShoppingCart size={20} />
+                            <span className="text-lg font-medium">Cart</span>
+                            {cartItems.length > 0 && (
+                                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">
+                                {cartItems.length}
+                                </span>
+                            )}
+                        </NavLink>
                         <button
                             onClick={() => setBtnName(btnName === "Login" ? "Logout" : "Login")}
                             className='px-4 py-2 rounded-full bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition'
                         >
                             {btnName}
                         </button>
+                        {/* <h3>{loggedUser}</h3> */}
                     </nav>
                 </div>
             </div>
