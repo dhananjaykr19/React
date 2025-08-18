@@ -28,7 +28,12 @@ export const NAV_ITEMS = [
     to : "/grocery",
     label : "Grocery",
     icon : ShoppingBasket
-  }
+  },
+  // {
+  //   to : "/cart",
+  //   label : "Cart",
+  //   icon : ShoppingCart
+  // }
 ];
 
 export const resList = [
