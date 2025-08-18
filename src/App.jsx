@@ -7,7 +7,11 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Error from './components/Error';
 import RestaurantMenu from './components/RestaurantMenu';
-import UserContext from './context/UserContext.js';
+import UserContext from './context/UserContext.jsx';
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore.js';
+import Cart from './components/Cart.jsx';
+
 // import Grocery from './components/Grocery';
 
 
@@ -30,14 +34,16 @@ const AppLayout = () => {
         setUserName(data.name);
     }, []);
     return (
-        <UserContext.Provider value={{loggedUser : userName}}>
-            <div className="app">
-                {/* <UserContext.Provider value={{loggedUser : "NastedName"}}> */} 
-                    <Header />
-                {/* </UserContext.Provider> */}
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={{loggedUser : userName, setUserName}}>
+                <div className="app">
+                    {/* <UserContext.Provider value={{loggedUser : "NastedName"}}> */} 
+                        <Header />
+                    {/* </UserContext.Provider> */}
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
     )
 }
 
@@ -67,6 +73,10 @@ const router = createBrowserRouter([
             {
                 path : "/restaurants/:resId",
                 element : <RestaurantMenu />
+            },
+            {
+                path : "/cart",
+                element : <Cart />
             }
         ],
         errorElement : <Error />,
