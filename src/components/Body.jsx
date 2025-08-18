@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import RestaurantCard, { withLabel } from './RestaurantCard'
 import Shimmer from "./shimmar.jsx";
 import { Link } from "react-router-dom";
 import useShowStatus from "../Hooks/useShowStatus.js";
 import useRestaurants from "../Hooks/useRestaurants.js";
 import OfflineGame from "./OfflineGame.jsx";
+import UserContext from "../context/UserContext.jsx";
 
 
 const Body = () => {
@@ -14,6 +15,7 @@ const Body = () => {
     const {allRestaurants, listOfRestaurants, setListOfRestaurants } = useRestaurants();
     const RestaurantCardWithLabel = withLabel(RestaurantCard);
     // console.log("Body Render's count's", listOfRestaurants);
+    const {loggedInUser, setUserName } = useContext(UserContext);
     if(!onlineStatus)
         return <OfflineGame />
     
@@ -28,6 +30,12 @@ const Body = () => {
                         value={searchRestaurants}
                         onChange={(e) => setSearchRestaurants(e.target.value)}
                     />
+                    {/* <input 
+                        type="text" 
+                        placeholder="enter username"
+                        value={loggedInUser}
+                        onChange={(e) => setUserName(e.target.value)}
+                    /> */}
                     <button
                         className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 shadow transition"
                         onClick={() => {
