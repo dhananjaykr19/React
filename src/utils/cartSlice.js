@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
 
 const cartSlice = createSlice({
     name : 'cart',
@@ -8,7 +8,16 @@ const cartSlice = createSlice({
     },
     reducers : {
         addItem : (state, action) => {
-            // mutating the state here
+
+
+            // Vanialla(Older) Redux ==> Don't Mutate State, returning was mandetory
+            // const newState = [...state];
+            // newState.items.push(action.payload);
+            // return newState;
+
+
+            // Redux Toolkit
+            // We have to mutate the state 
             state.items.push(action.payload);
         },
         removeItem : (state, action) => {
@@ -16,7 +25,12 @@ const cartSlice = createSlice({
             state.items.pop();
         },
         clearCart : (state) => {
+            // console.log(state); // proxy
+            // console.log(current(state)); // local variable
+
+            // RTK - either Mutate the state or return the new State
             state.items.length = 0;
+            // return {items : [] }; 
         }
     }
 });

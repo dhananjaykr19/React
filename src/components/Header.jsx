@@ -22,7 +22,10 @@ const Header = () => {
     // console.log(loggedUser);
 
     // Subscribing to the store using a selector 
+    // const cartItems = useSelector((store) => store.cart.items);
     const cartItems = useSelector((store) => store.cart.items);
+    // console.log(store);
+    // const cartItems = store.cart.items;
     // console.log(cartItems);
     
 
